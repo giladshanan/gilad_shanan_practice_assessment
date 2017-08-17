@@ -20,10 +20,10 @@ class Genie
   def grant_wish(wish)
     exit_lamp
     wish_count = 0
-    @submitted_wishes.each  do | key, value |
+    @submitted_wishes.each  do | wish_key, value |
       if @submitted_wishes.length == 0
         wish_count += 1
-      elsif @submitted_wishes[key]
+      elsif @submitted_wishes[wish_key]
         wish_count += 1
       end
     end
@@ -37,6 +37,11 @@ class Genie
     enter_lamp
     return @submitted_wishes[wish]
   end
+
+  def display_wish_history
+    @submitted_wishes.each { | key, value | p "Your wish, '#{key}' was #{value ? "granted" : "not granted" }." }
+  end
+
 end
 
 # Driver code
@@ -76,3 +81,6 @@ test_wishes = ["impeachment, soon please!", "a week hiking, swimming and camping
 test_wishes.each do | wish |
   genie1.grant_wish(wish)
 end
+
+# Q6
+genie1.display_wish_history
