@@ -42,6 +42,18 @@ class Genie
     @submitted_wishes.each { | key, value | p "Your wish, '#{key}' was #{value ? "granted" : "not granted" }." }
   end
 
+  def favorite_wish
+    favorites_hash = @submitted_wishes
+    @submitted_wishes.each do | wish, value  |
+      characters = wish.chars
+      favorites_hash[wish]= characters.count{ | letter | %w(a e i o u).include?(letter)}
+    end
+    # line 52 is for readability, not strictly necessary
+    favorite = favorites_hash.key(favorites_hash.values.max)
+    p "My favorite wish is '#{favorite}'."
+    return favorite
+  end
+
 end
 
 # Driver code
@@ -65,7 +77,7 @@ genie3 = Genie.new("Susan", 509234)
 # p genie1.exit_lamp
 # p genie1.enter_lamp
 
-# Q5
+# Q6
 # input - string
     # exit lamp
     # IF submitted_wishes has less than three true value entries
@@ -82,5 +94,15 @@ test_wishes.each do | wish |
   genie1.grant_wish(wish)
 end
 
-# Q6
+# Q7
 genie1.display_wish_history
+
+# Q8
+# input - hash of submitted wishes
+# create an array of each wish
+# count the vowels in EACH wish
+# count { |item| block } → int
+# assign the count as a value in a new hash
+# return the key from the highest value with `a.key(a.values.max)`
+# output - string with the most vowels
+genie1.favorite_wish
